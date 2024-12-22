@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bukaolshop Suntik Sosmed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .product-container {
+            margin-top: 20px;
+        }
+        .product {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f4f4f4;
+        }
+        .product p {
+            margin: 5px 0;
+        }
+        .product span {
+            font-weight: bold;
+        }
+        .product a {
+            display: inline-block;
+            margin-top: 5px;
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .product a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Suntik Sosial Media</h1>
+        <label for="socialMedia">Pilih Sosial Media:</label>
+        <select id="socialMedia" onchange="showProducts()">
+            <option value="">Pilih Sosial Media</option>
+            <option value="youtube">YouTube</option>
+            <option value="tiktok">TikTok</option>
+            <option value="instagram">Instagram</option>
+        </select>
+
+        <div id="productList" class="product-container">
+            <!-- Produk akan dimuat berdasarkan pilihan -->
+        </div>
+    </div>
+
+    <script>
+        // Produk untuk setiap platform
+        const products = {
+            youtube: [
+                { name: "YouTube Like Indonesia", price: "Rp 1,000 - 10,000", link: "https://fazasosmed.olshopku.com/produk/youtube-like-2841071" },
+                { name: "YouTube Subscriber Indonesia", price: "Rp 1,000 - 20,000", link: "https://fazasosmed.olshopku.com/produk/youtube-subscribers-2841642" },
+                { name: "YouTube Views Indonesia", price: "Rp 2,000 - 30,000", link: "https://fazasosmed.olshopku.com/produk/youtube-views-2841640" },
+            ],
+            tiktok: [
+                { name: "TikTok Like Indonesia", price: "Rp 1,000 - 15,000", link: "https://fazasosmed.olshopku.com/produk/tiktok-like-2841054" },
+                { name: "TikTok Followers Indonesia", price: "Rp 1,900 - 30,000", link: "https://fazasosmed.olshopku.com/produk/tiktok-followers-2841051" },
+                { name: "TikTok Views Indonesia", price: "Rp 1,000 - 45,000", link: "https://fazasosmed.olshopku.com/produk/tiktok-view-2841308" },
+            ],
+            instagram: [
+                { name: "Instagram Likes", price: "Rp 1,000 - 12,000", link: "https://fazasosmed.olshopku.com/produk/instagram-like-28415531" },
+                { name: "Instagram Followers", price: "Rp 1,000 - 24,000", link: "https://fazasosmed.olshopku.com/produk/instagram-followers-2841637" },
+                { name: "Instagram Views", price: "Rp 1,000 - 36,000", link: "https://example.com/instagram-produk-3" },
+            ],
+        };
+
+        // Fungsi untuk menampilkan produk
+        function showProducts() {
+            const socialMedia = document.getElementById("socialMedia").value;
+            const productList = document.getElementById("productList");
+            productList.innerHTML = ""; // Reset produk
+
+            if (products[socialMedia]) {
+                products[socialMedia].forEach(product => {
+                    const productDiv = document.createElement("div");
+                    productDiv.classList.add("product");
+                    productDiv.innerHTML = `
+                        <p>Produk: <span>${product.name}</span></p>
+                        <p>Harga: <span>${product.price}</span></p>
+                        <a href="${product.link}" target="_blank">Detail Produk</a>
+                    `;
+                    productList.appendChild(productDiv);
+                });
+            }
+        }
+    </script>
+</body>
+  </html>
