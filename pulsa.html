@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulsa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: aliceblue;
+        }
+
+        header {
+            background-color: #42A5F5;
+            color: #fff;
+            text-align: center;
+            padding: 0px;
+             
+            border-radius: 0 0 0% 0%;
+            height: 80px;
+        }
+
+        .box-in-header {
+            background-color: #fff;
+            color: #333;
+            width: 90%;
+            padding: 1em;
+            border-radius: 5px;
+            display: inline-block;
+            border: 2px solid aliceblue;
+            top: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 130px;
+            }
+
+            .box-in-header {
+                top: 15px;
+            }
+        }
+
+        .box-in-header label {
+            display: block;
+            background: #fff; 
+            text-align: left;
+            border-radius:10px;
+            padding: 10px 10px 10px 0px;
+            color:white;
+            margin-bottom: 0px;
+            box-shadow: 0px; 
+        }
+
+        .box-in-header input {
+            width: calc(100% - 1em);
+            padding: 10px 10px 10px 10px;
+            margin: 0px 20px 0px 0px;
+            background:#000;
+            color:#fff;
+            border: 0px solid #555;
+            border-radius: 5px;
+            outline: none;
+            height:45px;
+            
+        }
+
+       
+
+        .second-box {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            display: inline-block;
+            align-items: center;
+            height: 0;
+        }
+
+       .group-button {
+            display: flex;
+        }
+
+        .group-button button {
+            flex: 1;
+            padding:2px 7px 5px 7px;  
+            height:30px;          
+            margin: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            outline: none;
+            
+        }
+                
+        
+        .group-button button:hover {
+            background-color: #42A5F5;
+            color: #fff;
+            transform: scale(1.05);
+            height:30px;  
+        }
+
+        .group-button button:active {
+            transform: scale(0.95);
+            box-shadow: none;
+            height:30px;  
+        }        
+        
+        
+
+    /* Add your styling here */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .product-item {
+      background-color: #fff;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  height:67px; 
+}
+
+
+
+.product-item p {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size:13.5px;
+    opacity:0.9;
+    position: absolute;
+    right: 9%;
+    color:#fff;
+    background-color: #42A5F5;
+    border-radius: 10px 0px 10px 0px;
+    padding:2px 10px;
+}
+.product-item .category-info {
+    font-size: 10px;
+    margin-top:0px;
+    background: transparent;
+    text-align: right;
+    position: absolute;
+    right: 9%;
+    color:#1aa556;
+    padding:2px 10px;
+    border-radius: 15px;
+}
+    h2 {
+      font-size: 13px;
+      margin: 0;
+      width: 55%;
+      border-left:5px solid #42A5F5;
+      border-radius: 2% 0% 0% 2%;
+      font-weight:bold;
+      height:47px;
+      padding-left:8px;
+    }
+  /* Tambahan CSS untuk memastikan tata letak modal yang benar */
+.modal.fade .modal-dialog.modal-dialog-scrollable {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;     
+    transform: translate(0, 100%);
+    transition: transform 0.3s ease-out;
+    border-radius: 0; /* Menghilangkan border-radius bawaan Bootstrap pada elemen modal */
+}
+
+.modal-content{
+    border-radius:0;
+    border: 0px solid #ccc;
+    background-color:#fff;
+}
+
+.modal-header{
+    background-color:#42A5F5;
+    color:#fff;
+    height:35px;border-radius: 0px;
+}
+
+.modal.show .modal-dialog.modal-dialog-scrollable {
+    transform: translate(0, 0);
+}
+
+
+/* Tambahkan ke bagian CSS Anda */
+
+.modal-body .table {
+    border: none; /* Menghilangkan garis tabel */
+}
+
+.modal-body .table tbody tr td {
+    border: none; /* Menghilangkan garis di sel tabel */
+}
+ .modal-body .table tbody tr td {
+    padding: 7px 0px; /* Atur ruang sel dalam tabel */
+}
+.modal-title {    
+}
+.blink {
+      width: 15px;
+      height: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: blink-animation 1s infinite;
+    }
+
+    @keyframes blink-animation {
+      0%, 50%, 100% {
+        opacity: 0;
+      }
+      25%, 75% {
+        opacity: 1;
+      }
+    }
+    ::placeholder{
+        color:#999;
+        font-size: 13px;
+    }
+  </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Helvetica Neue:wght@400;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <header class="Jasaedithtml-oke">
+        <div class="box-in-header">
+           
+  
+     <img class="jasaedithtml-image" src="https://fluspayy.wordpress.com/wp-content/uploads/2024/11/20241115_173341.png"><p style="font-weight: 800;text-align: left;margin:0% 5% 0% 0%;font-size: 20px;"><b> Pulsa Reguler </b></p>
+     
+     <p style="font-weight: 1000;text-align: left;margin-top: -5px;font-size: 10px"><b> All Operator</b></p>   
+
+            
+            
+          <label>
+<div class="d-flex">
+<input type="tel" id="inputNumber" class="{{hasil_kontak}}" name="catatan" placeholder="Masukkan Nomor ..."/>
+<a href="https://fazasosmed.bukaolshop.net/ambil_kontak" class="logo-link animate__animated animate__fadeIn">
+    <a href="https://aryatopupapps.bukaolshop.site/ambil_kontak"><img style="width: 45px;height:45px;border:1px solid #;box-shadow: none;border-radius: 5px; background: #; float:right;margin-right:0%;padding:4px;margin-top: 0px;" src="https://cdn-icons-png.flaticon.com/128/46/46646.png"></a>
+</a>   
+</label>
+
+
+        </div>        
+        </div>
+        </div>
+         <div class="container"style="text-align: center; margin-top: 13px;padding:1k5px;background-color: aliceblue;">             
+  
+
+    </header>    <div id="produk-list-container" style="margin-top:20px;padding:20px">
+        <ul id="produk-list">
+            <center>
+            <div id="info"><img class="jasaedithtmlimg" src=""><br><br><p style="float:left;font-size:12px;font-weight:600;padding-left:20%;padding-right:20%;color:#3b3b3b;" >Masukkan nomor tujuan untuk melihat produk</p></div></center>
+        </ul>
+    </div>       
+ <div class="modal fade" id="productModal" tabindex="-1" role="dialog"aria-labelledby="logoModal1Label" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                  <h3 style="font-size: 14px;margin-top: -10px;"class="modal-title" id="exampleModalLabel"><img style="width:20px;margin-top: -2px;margin-left: -7px;" src="https://i.ibb.co/D4rGTFQ/20221212-220311.png"> Rincian pesanan :</h3>
+            </div>
+            <div class="modal-body">                
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td class="modal-label"style="font-size:13px;font-weight:bold">Tujuan :</td>
+                            <td style="font-size:13px;font-weight:bold" class="modal-value text-right" id="nomorTujuanModal"></td>
+                        </tr> 
+                                                             
+                        <tr style="border-top: 1px dashed #999;">
+                            <td class="modal-label"style="font-size:13px;font-weight:bold">Produk:</td>
+                            <td style="font-size:13px;font-weight:bold" class="modal-value text-right" id="productNameModal"></td>
+                        </tr>
+                        <tr style="border-top: 1px dashed #999;">
+                            <td class="modal-label"style="font-size:13px;font-weight:bold">Harga:</td>
+                            <td style="font-size:13px;font-weight:bold" class="modal-value text-right" id="productPriceModal"></td>
+                        </tr>                                                                                 
+                        
+                           <tr>  
+                         
+                            <td colspan="2" style="border: 0.1px solid #ccc;font-size:12px;padding:15px;font-weight:bold;text-align: center;background: #fff;" id="deskripsisingkatModal"></td>
+                        </tr>
+                    </tbody>
+                </table>       
+              <div class="group-button" style="background-color: #fff; margin-top: 3px; padding: 5px; border-radius: 5px; border: 2px solid aliceblue; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    
+    <a id="link-beli" href="https://p.com" class="btn btn-primary custom-button" style="box-shadow: none; border-color: transparent;width: 100%; border-radius: 5px;margin-top:-15px;">Beli sekarang</a>
+</div>
+                    
+               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+       $// Ubah bagian skrip berikut
+$('#productModal').on('show.bs.modal', function (e) {
+    var descriptionContainer = document.getElementById("deskripsisingkatModal");
+    descriptionContainer.innerHTML = descriptionContainer.innerText;
+});
+
+      var activeCategoryColor = "";
+   var previousNomorPemanggil = ""; document.addEventListener("DOMContentLoaded", function () {
+    const kategoriUrls = [
+        {
+            "Idkategori1": "628192",
+            
+           
+             "Warna": "linear-gradient(to right, #BD180F, #F56338)",
+            "propaider": "Telkomsel",
+            "nomorpemanggil": ["0811", "0812", "0813", "0821", "0822", "0852", "0853", "0823", "0851", "0835"]
+        },
+        {
+            "Idkategori1": "#",
+            
+            
+           "Warna": "linear-gradient(to right, #F03665, #F56338)",
+            "propaider": "Tre ID",
+            "nomorpemanggil": ["0895", "0896", "0897", "0898", "0899"]
+        },
+        {
+            "Idkategori1": "629346",
+            
+           "Warna": "linear-gradient(to right, #703090, #703090)",
+            "propaider": "Axis ",
+            "nomorpemanggil": ["0838", "0831", "0832", "0833"]
+        },
+        {
+            "Idkategori1": "#",
+            
+           "Warna": "linear-gradient(to right, #F8B80E, #F19722)",
+            "propaider": "Indosat",
+            "nomorpemanggil": ["0814", "0815", "0816", "0855", "0856", "0857", "0858"]
+        },
+        {
+            "Idkategori1": "#",
+            
+           "Warna": "linear-gradient(to right, #0128A7, #00C798)",
+            "propaider": "Xl axiata",
+            "nomorpemanggil": ["0818", "0817", "0819", "0859", "0877", "0878"]
+        },
+         {
+            "Idkategori1": "#",
+           
+           "Warna": "linear-gradient(to right, #C80050, #F84277)",
+            "propaider": "Smartfren",
+            "nomorpemanggil": ["0881", "0882", "0883", "0884", "0885", "0886", "0887", "0888", "0889"]
+        },
+        // Tambahkan kategori lainnya sesuai kebutuhan
+    ];
+
+    var produkList = document.getElementById("produk-list");
+    var inputNumber = document.getElementById("inputNumber");
+    var regulerButton = document.querySelector('.reguler-button');
+    var transferButton = document.querySelector('.transfer-button');
+    var activeCategory;
+    var productsLoaded = false;
+
+    function getCategoryByNomorPemanggil(nomorPemanggil) {
+        return kategoriUrls.find(category => category.nomorpemanggil.includes(nomorPemanggil));
+    }
+
+    function displayProducts(products) {
+    if (products.length > 0) {
+        products.forEach(function (product) {
+            var productItem = document.createElement("li");
+            productItem.className = "product-item animate__animated animate__fadeIn";
+
+            var productName = document.createElement("h2");
+            productName.textContent = product.nama_produk;
+
+            var formattedPrice = parseFloat(product.harga_produk).toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            });
+
+            var productPrice = document.createElement("p");
+            productPrice.innerHTML = ` ${formattedPrice}`;
+
+            var categoryText = "Bonus Point";
+            var categoryInfo = document.createElement("p");
+            categoryInfo.textContent = categoryText;
+            categoryInfo.className = "category-info";
+
+            productItem.setAttribute("data-toggle", "modal");
+            productItem.setAttribute("data-target", "#productModal");
+
+            // Cari elemen dengan ID 'link-beli'
+var bayar = document.getElementById('link-beli');
+
+// Tangani klik pada setiap item produk
+productItem.addEventListener("click", function () {
+    document.getElementById("productNameModal").textContent = "" + product.nama_produk;
+    document.getElementById("productPriceModal").textContent = "" + formattedPrice;
+
+    var descriptionContainer = document.getElementById("deskripsisingkatModal");
+    descriptionContainer.textContent = "";
+
+    var wrapperDiv = document.createElement('div');
+    wrapperDiv.innerHTML = product.deskripsi_singkat;
+
+    wrapperDiv.childNodes.forEach(function (node) {
+        descriptionContainer.appendChild(node.cloneNode(true));
+    });
+
+    // Dapatkan nomor tujuan dari input
+    var nomorTujuan = inputNumber.value;
+
+    // Buat URL produk dengan catatan nomor tujuan
+    var urlProduk = product.url_produk + "?catatan=" + encodeURIComponent(nomorTujuan);
+
+    // Atur atribut href pada elemen <a> untuk menuju URL produk
+    bayar.href = urlProduk;
+});
+
+            productItem.appendChild(productName);
+            productItem.appendChild(productPrice);
+            productItem.appendChild(categoryInfo);
+
+            produkList.appendChild(productItem);
+        });
+    }
+}
+
+    function fetchProductsByPage(page) {
+        if (activeCategory) {
+            var token = "eyJhcHAiOiIxNjYyMzMiLCJhdXRoIjoiMjAyNDExMjUiLCJzaWduIjoiZzB3XC9oeVNGOWxES3ZBMXV2SURRbHc9PSJ9=";
+            var apiUrl = "https://openapi.bukaolshop.net/v1/app/produk?token=" + token + "&page=" + page + "&id_kategori=" + activeCategory;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    displayProducts(data.data);
+                    sortAndDisplayProducts(true); // Mengurutkan produk secara otomatis
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function sortAndDisplayProducts(ascending) {
+        if (productsLoaded) {
+            var productList = Array.from(document.querySelectorAll('.product-item'));
+
+            productList.sort(function (a, b) {
+                var priceA = parseFloat(a.querySelector('p').textContent.split(" ")[1].trim().replace("Rp", "").replace(",", ""));
+                var priceB = parseFloat(b.querySelector('p').textContent.split(" ")[1].trim().replace("Rp", "").replace(",", ""));
+
+                return ascending ? priceA - priceB : priceB - priceA;
+            });
+
+            produkList.innerHTML = "";
+
+            productList.forEach(function (productItem) {
+                produkList.appendChild(productItem);
+            });
+        }
+    }
+
+    function handleInput() {
+    var nomorPemanggil = inputNumber.value.slice(0, 4);
+    if (nomorPemanggil.length === 4) {
+        var selectedCategory = getCategoryByNomorPemanggil(nomorPemanggil);
+        if (selectedCategory) {
+            var newCategory = transferButton.classList.contains('active') ? selectedCategory.Idkategori2 : selectedCategory.Idkategori1;
+
+            if (newCategory !== activeCategory) {
+                produkList.innerHTML = "";
+                productsLoaded = false;
+            }
+
+            activeCategory = newCategory;
+            activeCategoryColor = selectedCategory.Warna; // Simpan warna kategori yang aktif
+
+            if (!productsLoaded) {
+                for (let page = 1; page <= 5; page++) {
+                    fetchProductsByPage(page);
+                }
+
+                productsLoaded = true;
+            }
+            // Tambahan logika untuk menampilkan propaider
+var label = document.querySelector('label[for="inputNumber"]');
+label.innerHTML = `Pulsa (${selectedCategory.propaider})`;
+label.style.background = selectedCategory.Warna; // Mengatur warna gradien latar belakang
+// Akhir dari tambahan logika
+
+        } else {
+            productsLoaded = false;
+            produkList.innerHTML = "";
+        }
+    } else {
+        productsLoaded = false;
+        produkList.innerHTML = "";
+    }
+
+    // Update warna label
+    updateLabelColor();
+}
+
+// Tambahkan fungsi untuk memperbarui warna label
+function updateLabelColor() {
+    var label = document.querySelector('label[for="inputNumber"]');
+    if (activeCategoryColor) {
+        label.style.backgroundColor = activeCategoryColor;
+    } else {
+        label.style.backgroundColor = ""; // Atur ke nilai default jika warna tidak ditemukan
+    }
+}
+
+
+function loadIdkategori1(nomorPemanggil) {
+    var selectedCategory = getCategoryByNomorPemanggil(nomorPemanggil);
+    if (selectedCategory) {
+        activeCategory = selectedCategory.Idkategori1;
+        activeCategoryColor = selectedCategory.Warna;
+        produkList.innerHTML = "";
+        productsLoaded = false;
+
+        for (let page = 1; page <= 5; page++) {
+            fetchProductsByPage(page);
+        }
+
+        productsLoaded = true;
+        handleInput();
+        
+    }
+}
+
+var selectedCategory; // Pindahkan definisi selectedCategory ke luar dari event listener
+
+// Tambahkan event listener ke elemen input
+// Deklarasi variabel global
+var previousNomorPemanggil = "";
+
+// Tambahkan event listener ke elemen input
+inputNumber.addEventListener("input", function () {
+    var currentNomorPemanggil = inputNumber.value.slice(0, 4);
+
+    if (currentNomorPemanggil !== previousNomorPemanggil) {
+        // Pemanggilan fungsi untuk menangani perubahan nomor pemanggil
+        if (currentNomorPemanggil.length === 4) {
+            loadIdkategori1(currentNomorPemanggil);
+        } else {
+            productsLoaded = false;
+            produkList.innerHTML = "";
+        }
+
+        // Memanggil fungsi untuk memperbarui warna label
+        updateLabelColor();
+
+        // Tambahan logika untuk menampilkan propaider dan mengatur warna latar belakang
+        var label = document.querySelector('label[for="inputNumber"]');
+        if (currentNomorPemanggil.length === 4 && selectedCategory) {
+            label.innerHTML = `Pulsa (${selectedCategory.propaider})`;
+            label.style.background = selectedCategory.Warna; // Mengatur warna gradien latar belakang
+        } else {
+            label.innerHTML = ''; // Kembalikan teks label ke default
+            label.style.background = ''; // Kembalikan warna latar belakang ke default
+        }
+
+        // Memperbarui nilai nomor pemanggil sebelumnya
+        previousNomorPemanggil = currentNomorPemanggil;
+    }
+});
+
+
+
+    // Logika perubahan format nomor telepon
+    $('#inputNumber').on('change', function () {
+        var no = $(this).val()
+        var newno = no.replace('-', '').trim()
+        var cek = newno.substring(0, 3).replace('-', '').trim()
+        var ceka = newno.substring(3, 26).replace('-', '').trim()
+
+        if (cek == '+62') {
+            let result = 0
+            $(this).val(result + ceka)
+            getNmr(result + ceka)
+        } else {
+            $(this).val(cek + ceka)
+            getNmr(cek + ceka);
+        }
+    });
+
+    function getNmr(nomor) {
+    // Implementasikan aksi yang diinginkan dengan nomor telepon di sini
+    console.log("Nomor Telepon yang Dipilih: " + nomor);
+    // Update nilai input dengan nomor yang dipilih
+    $('#hasil_kontak').val(nomor);
+
+    // Memperbarui nomor tujuan pada elemen HTML di dalam modal
+    $('#nomorTujuanModal').text(nomor);
+    
+    // Memanggil fungsi handleInput untuk menampilkan produk yang sesuai
+    handleInput();
+}
+
+    // Tambahkan event listener ke elemen input
+    inputNumber.addEventListener("input", function () {
+        // Memperbarui nomor tujuan pada elemen HTML di dalam modal
+        nomorTujuanModal.textContent = inputNumber.value;
+
+        handleInput();
+    });
+
+    regulerButton.addEventListener("click", function () {
+        regulerButton.classList.add('active');
+        transferButton.classList.remove('active');
+        handleInput();
+    });
+
+    transferButton.addEventListener("click", function () {
+        transferButton.classList.add('active');
+        regulerButton.classList.remove('active');
+        handleInput();
+    });
+
+    // Tambahkan event listener ke elemen input
+    inputNumber.addEventListener("input", function () {
+        handleInput();
+    });
+
+    handleInput();
+});
+// Tangani klik pada elemen dengan class "ambil_kontak"
+$('.ambil_kontak').on('click', function (event) {
+    // Mencegah navigasi ke halaman yang ditentukan dalam atribut href
+    event.preventDefault();
+    console.log("Elemen Ambil Kontak diklik");
+    // Navigasi manual ke halaman ambil kontak
+    window.location.href = $(this).attr('href');
+});
+</script>
+<script>
+<!--
+document.write(unescape("%3Cstyle%3E%0A%20%20%20%20jasaedithtml-oke%7B%0A%20%20%20%20%20%20%20%20position%3A%20sticky%3B%20top%3A%200%3B%20z-index%3A%201000%3B%0A%20%20%20%20%7D%0A%20%20%20%20.jasaedithtml-image%7B%0A%20%20%20%20%20%20%20%20width%3A45px%3Bheight%3A45px%3Bfloat%3Aleft%3Bborder-radius%3A%2010px%3Bmargin-top%3A%200px%3Bmargin-left%3A0px%3Bfont-weight%3A%20bold%3Bmargin-right%3A%2010px%3B%0A%20%20%20%20%20border%3A0px%20solid%20%23ccc%0A%20%20%20%20%7D.jasaedithtmlimg%7B%0A%20%20%20%20%20%20%20%20width%3A200px%3Bcolor%3A%23fff%3B%20margin-top%3A%2050px%3B%0A%20%20%20%20%7D%0A%3C/style%3E"));
+//-->
+</script>
+
+</body>
+</html>
